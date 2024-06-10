@@ -1,0 +1,18 @@
+# Allow access from office or home network to ports 1000-1010
+config rule
+    option name 'Allow-Access-from-Office-Home'
+    option src 'lan'  # Assuming LAN interface corresponds to office or home network
+    option family 'ipv4'
+    option src_ip '192.168.3.0/24'
+    option dest_port '1000-1010'
+    option proto 'tcp'
+    option target 'ACCEPT'
+
+# Deny access from outside office or home network to ports 1000-1010
+config rule
+    option name 'Deny-Access-from-Outside'
+    option src '!lan'  # Not LAN means not from office or home network
+    option family 'ipv4'
+    option dest_port '1000-1010'
+    option proto 'tcp'
+    option target 'REJECT'

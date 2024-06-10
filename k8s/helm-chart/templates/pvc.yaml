@@ -1,0 +1,12 @@
+{{- if .Values.persistentVolume.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "sample-app.fullname" . }}-pvc
+spec:
+  accessModes:
+    - {{ .Values.persistentVolume.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistentVolume.capacity }}
+{{- end }}
